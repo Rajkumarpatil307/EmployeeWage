@@ -1,24 +1,8 @@
 import random
 
-def check_attendance():
-    attendance = random.randint(0, 1)
-    if attendance == 1:
-        print("Employee is Present")
-    else:
-        print("Employee is Absent")
 def calculate_daily_wage(wage_per_hour):
-    attendance = random.randint(0, 2)  # 0: Absent, 1: Full-time, 2: Part-time
-    
-    if attendance == 1:
-        daily_wage = wage_per_hour * 8  # Full-time hours
-        print(f"Employee is Present (Full-time). Daily Wage: {daily_wage}")
-    elif attendance == 2:
-        daily_wage = wage_per_hour * 4  # Part-time hours
-        print(f"Employee is Present (Part-time). Daily Wage: {daily_wage}")
-    else:
-        print("Employee is Absent. Daily Wage: 0")
     attendance = random.randint(0, 2)
-
+    
     match attendance:
         case 1:
             daily_wage = wage_per_hour * 8
@@ -29,6 +13,23 @@ def calculate_daily_wage(wage_per_hour):
         case _:
             print("Employee is Absent. Daily Wage: 0")
 
-check_attendance()
-calculate_daily_wage(20) 
+def calculate_monthly_wage(wage_per_hour):
+    total_wage = 0
+    working_days = 20
+
+    for _ in range(working_days):
+        attendance = random.randint(0, 2)
+        
+        match attendance:
+            case 1:
+                total_wage += wage_per_hour * 8
+            case 2:
+                total_wage += wage_per_hour * 4
+            case _:
+                total_wage += 0
+    
+    print(f"Total Monthly Wage: {total_wage}")
+
+# Function calls
 calculate_daily_wage(20)
+calculate_monthly_wage(20)
