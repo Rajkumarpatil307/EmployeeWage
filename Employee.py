@@ -6,15 +6,10 @@ def check_attendance():
         print("Employee is Present")
     else:
         print("Employee is Absent")
-
-def calculate_daily_wage(wage_per_hour, full_day_hours):
-    attendance = random.randint(0, 1)
 def calculate_daily_wage(wage_per_hour):
     attendance = random.randint(0, 2)  # 0: Absent, 1: Full-time, 2: Part-time
     
     if attendance == 1:
-        daily_wage = wage_per_hour * full_day_hours
-        print(f"Employee is Present. Daily Wage: {daily_wage}")
         daily_wage = wage_per_hour * 8  # Full-time hours
         print(f"Employee is Present (Full-time). Daily Wage: {daily_wage}")
     elif attendance == 2:
@@ -22,8 +17,18 @@ def calculate_daily_wage(wage_per_hour):
         print(f"Employee is Present (Part-time). Daily Wage: {daily_wage}")
     else:
         print("Employee is Absent. Daily Wage: 0")
+    attendance = random.randint(0, 2)
 
+    match attendance:
+        case 1:
+            daily_wage = wage_per_hour * 8
+            print(f"Employee is Present (Full-time). Daily Wage: {daily_wage}")
+        case 2:
+            daily_wage = wage_per_hour * 4
+            print(f"Employee is Present (Part-time). Daily Wage: {daily_wage}")
+        case _:
+            print("Employee is Absent. Daily Wage: 0")
 
 check_attendance()
-calculate_daily_wage(20, 8)
 calculate_daily_wage(20) 
+calculate_daily_wage(20)
