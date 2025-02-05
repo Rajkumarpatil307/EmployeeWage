@@ -1,31 +1,33 @@
 import random
 
-class Employee:
-    def __init__(self, wage_per_hour=20):
-        self.wage_per_hour = wage_per_hour
-        self.total_wage = 0
-        self.total_hours = 0
-        self.working_days = 0
+class EmployeeWageComputation:
+    @classmethod
+    def calculate_wages(cls, company, wage_per_hour, max_hours, max_days):
+        total_wage = 0
+        total_hours = 0
+        working_days = 0
 
-    def calculate_wages_until_condition(self, max_hours=100, max_days=20):
-        while self.total_hours < max_hours and self.working_days < max_days:
+        while total_hours < max_hours and working_days < max_days:
             attendance = random.randint(0, 2)
-            
-            if attendance == 1:
-                self.total_wage += self.wage_per_hour * 8
-                self.total_hours += 8
-                self.working_days += 1
-            elif attendance == 2:
-                self.total_wage += self.wage_per_hour * 4
-                self.total_hours += 4
-                self.working_days += 1
-            else:
-                self.working_days += 1  # Counting days even if absent
-        
-        print(f"Total Wage: {self.total_wage}")
-        print(f"Total Hours Worked: {self.total_hours}")
-        print(f"Total Days Worked: {self.working_days}")
 
-# Create an employee instance and calculate wages
-employee = Employee()
-employee.calculate_wages_until_condition()
+            match attendance:
+                case 1:
+                    total_wage += wage_per_hour * 8
+                    total_hours += 8
+                    working_days += 1
+                case 2:
+                    total_wage += wage_per_hour * 4
+                    total_hours += 4
+                    working_days += 1
+                case _:
+                    pass
+
+        print(f"Company: {company}")
+        print(f"Total Wage: {total_wage}")
+        print(f"Total Hours Worked: {total_hours}")
+        print(f"Total Days Worked: {working_days}")
+        print("-" * 30)
+
+EmployeeWageComputation.calculate_wages("Company A", 20, 100, 20)
+EmployeeWageComputation.calculate_wages("Company B", 25, 120, 22)
+EmployeeWageComputation.calculate_wages("Company C", 18, 90, 18)
