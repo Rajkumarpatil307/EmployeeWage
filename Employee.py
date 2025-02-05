@@ -1,33 +1,31 @@
 import random
 
-def calculate_monthly_wage(wage_per_hour):
-  def calculate_wages_until_condition(wage_per_hour):
-    total_wage = 0
-    working_days = 20
-    total_hours = 0
-    working_days = 0
+class Employee:
+    def __init__(self, wage_per_hour=20):
+        self.wage_per_hour = wage_per_hour
+        self.total_wage = 0
+        self.total_hours = 0
+        self.working_days = 0
 
-    for _ in range(working_days):
-      while total_hours < 100 and working_days < 20:
-        attendance = random.randint(0, 2)
+    def calculate_wages_until_condition(self, max_hours=100, max_days=20):
+        while self.total_hours < max_hours and self.working_days < max_days:
+            attendance = random.randint(0, 2)
+            
+            if attendance == 1:
+                self.total_wage += self.wage_per_hour * 8
+                self.total_hours += 8
+                self.working_days += 1
+            elif attendance == 2:
+                self.total_wage += self.wage_per_hour * 4
+                self.total_hours += 4
+                self.working_days += 1
+            else:
+                self.working_days += 1  # Counting days even if absent
+        
+        print(f"Total Wage: {self.total_wage}")
+        print(f"Total Hours Worked: {self.total_hours}")
+        print(f"Total Days Worked: {self.working_days}")
 
-        match attendance:
-            case 1:
-                total_wage += wage_per_hour * 8
-                total_hours += 8
-                working_days += 1
-            case 2:
-                total_wage += wage_per_hour * 4
-                total_hours += 4
-                working_days += 1
-            case _:
-                total_wage += 0
-                pass
-
-    print(f"Total Monthly Wage: {total_wage}")
-    print(f"Total Wage: {total_wage}")
-    print(f"Total Hours Worked: {total_hours}")
-    print(f"Total Days Worked: {working_days}")
-
-calculate_monthly_wage(20)
-calculate_wages_until_condition(20)
+# Create an employee instance and calculate wages
+employee = Employee()
+employee.calculate_wages_until_condition()
